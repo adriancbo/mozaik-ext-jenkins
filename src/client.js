@@ -54,7 +54,7 @@ const client = function (mozaik) {
         },
 
         job(params) {
-            return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building]`)
+            return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building,changeSet[items[msg,author[fullName]]]]`)
                 .then(res => res.body.builds)
             ;
         },

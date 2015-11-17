@@ -34,6 +34,18 @@ var JobStatus = React.createClass({
         });
     },
 
+    getCommitInfo(changeSet) {
+        let info = changeSet.items[0];
+
+        for(var i = 0; i < changeSet.items.length; i++) {
+            let x = changeSet.items[i];
+            if(x.author.fullName != "scmbuild") {
+                return `${x.msg} by ${x.author.fullName}`;
+            }
+        }
+        return "No changes";
+    },
+
     render() {
         var iconClasses  = 'fa fa-close';
         var currentNode  = null;
@@ -41,14 +53,29 @@ var JobStatus = React.createClass({
 
         if (this.state.builds.length > 0) {
             var currentBuild = this.state.builds[0];
+            var buildIdx = 0;
+            var firstFailure;
+            var changeStr = "";
 
             //Show pass/fail status only.
             if (currentBuild.building === true && this.state.builds.length > 1) {
                 currentBuild = this.state.builds[1];
+                buildIdx = 1;
             }
 
             if (currentBuild.result === 'SUCCESS') {
                 iconClasses = 'fa fa-check';
+                changeStr = `Latest change: ${this.getCommitInfo(currentBuild.changeSet)}`;
+
+            } else if (currentBuild.result === 'FAILURE') {
+                firstFailure = currentBuild;
+                while(this.state.builds[buildIdx + 1] && this.state.builds[buildIdx + 1].result === 'FAILURE') {
+                    firstFailure = this.state.builds[buildIdx+1];
+                    buildIdx++;
+                }
+                changeStr = `Failing since: ${this.getCommitInfo(firstFailure.changeSet)}`;
+
+
             }
 
             var statusClasses = 'jenkins__job-status__current__status jenkins__job-status__current__status--' + currentBuild.result.toLowerCase();
@@ -60,6 +87,9 @@ var JobStatus = React.createClass({
                         {currentBuild.result}&nbsp;
                         <i className={iconClasses} />
                     </span><br/>
+                    <span>
+                        {changeStr}
+                    </span><br />
                     <time className="jenkins__job-status__current__time">
                         <i className="fa fa-clock-o" />&nbsp;
                         {moment(currentBuild.timestamp, 'x').fromNow()}
@@ -71,7 +101,7 @@ var JobStatus = React.createClass({
                 var previousBuild = this.state.builds[1];
                 previousNode = (
                     <div className="jenkins__job-status__previous">
-                        previous status were&nbsp;
+                        Previous status was&nbsp;
                         {previousBuild.result}&nbsp;
                         {moment(previousBuild.timestamp, 'x').fromNow()}
                     </div>

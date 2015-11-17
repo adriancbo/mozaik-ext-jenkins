@@ -4,9 +4,10 @@ import moment                          from 'moment';
 
 class JobBuild extends Component {
     render() {
-        let { build } = this.props;
+        let { build, job } = this.props;
 
         let classes = `list__item list__item--with-status list__item--with-status--${ build.result.toLowerCase() }`;
+        let link = `http://fmsscm.corp.intuit.net/qbo-build/job/${job}/${build.number}`;
 
         return (
             <div className={classes}>
@@ -15,6 +16,7 @@ class JobBuild extends Component {
                     <i className="fa fa-clock-o" />&nbsp;
                     {moment(build.timestamp, 'x').fromNow()}
                 </time>
+                <a href={link}><i style={{float: "right", color: "#e0c671"}}className="fa fa-external-link fa-lg" /></a>
             </div>
         );
     }

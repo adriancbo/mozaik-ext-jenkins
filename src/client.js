@@ -46,6 +46,12 @@ const client = function (mozaik) {
 
                 })
         },
+
+        testReport(params) {
+            return buildRequest(`/job/${ params.job }/lastCompletedBuild/testReport/api/json`)
+                .then(res => res.body)
+                ;
+        },
         
         jobs() {
             return buildRequest('/api/json?tree=jobs[name,lastBuild[number,building,timestamp,result]]&pretty=true')

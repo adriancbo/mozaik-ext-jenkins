@@ -46,6 +46,12 @@ const client = function (mozaik) {
 
                 })
         },
+        coverageHistory: function() {
+            return request.get('http://fmsscm.corp.intuit.net/sonar/api/timemachine?resource=improved-inventory&metrics=line_coverage,branch_coverage')
+                .promise().then(function(res) {
+                    return res.body;
+                });
+        },
 
         testReport(params) {
             return buildRequest(`/job/${ params.job }/lastCompletedBuild/testReport/api/json`)

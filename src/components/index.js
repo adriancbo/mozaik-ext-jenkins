@@ -5,5 +5,6 @@ module.exports = {
     JobBuildsHistogram: require('./JobBuildsHistogram.jsx'),
     View:               require('./View.jsx'),
     Coverage:           require('./Coverage.jsx'),
+    CoverageHistogram:  require('./CoverageHistogram'),
     JobStatusTestBreakdown: require('./JobStatusTestBreakdown.jsx')
 };

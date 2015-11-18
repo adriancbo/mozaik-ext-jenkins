@@ -130,9 +130,7 @@ var CoverageHistogram = React.createClass({
         return {
             id: id,
             params: {
-                id: this.props.id,
-                startDate: this.props.startDate,
-                endDate: this.props.endDate
+                id: this.props.id
             }
         };
     },

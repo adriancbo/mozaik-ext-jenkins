@@ -53,7 +53,7 @@ var JobStatusTestBreakdown = React.createClass({
                 let numPassing = suite.cases.length, numFailing = 0;
                 for (let j = 0; j < numPassing; j++) {
                     let test = suite.cases[j];
-                    if (test.status !== "PASSED" ) {
+                    if (test.status !== "PASSED" && test.status !== "FIXED" ) {
                         numPassing--;
                         numFailing++;
                     }

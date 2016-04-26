@@ -4,7 +4,7 @@ import moment                          from 'moment';
 
 class JobBuild extends Component {
     render() {
-        let { build, job } = this.props;
+        let { build, job, baseUrl, user, password } = this.props;
 
         let classes = `list__item list__item--with-status list__item--with-status--${ build.result.toLowerCase() }`;
         let link = `http://fmsscm.corp.intuit.net/qbo-build/job/${job}/${build.number}`;
@@ -23,10 +23,7 @@ class JobBuild extends Component {
 }
 
 JobBuild.propTypes = {
-    build: PropTypes.object.isRequired,
-    baseUrl: PropTypes.string,
-    user: PropTypes.string,
-    password: PropTypes.string
+    build: PropTypes.object.isRequired
 };
 
 export { JobBuild as default };

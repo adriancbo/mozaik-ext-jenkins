@@ -71,10 +71,7 @@ class JobBuildsHistogram extends Component {
 
 JobBuildsHistogram.propTypes = {
     job: PropTypes.string.isRequired,
-    cap: PropTypes.number.isRequired,
-    baseUrl: PropTypes.string,
-    user: PropTypes.string,
-    password: PropTypes.string
+    cap: PropTypes.number.isRequired
 };
 
 JobBuildsHistogram.defaultProps = {

@@ -10,10 +10,7 @@ var JobStatus = React.createClass({
     ],
 
     propTypes: {
-        job: React.PropTypes.string.isRequired,
-        baseUrl: PropTypes.string,
-        user: PropTypes.string,
-        password: PropTypes.string
+        job: React.PropTypes.string.isRequired
     },
 
     getInitialState() {

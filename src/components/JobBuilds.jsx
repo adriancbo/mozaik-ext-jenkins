@@ -55,10 +55,7 @@ class JobBuilds extends Component {
 }
 
 JobBuilds.propTypes = {
-    job: PropTypes.string.isRequired,
-    baseUrl: PropTypes.string,
-    user: PropTypes.string,
-    password: PropTypes.string
+    job: PropTypes.string.isRequired
 };
 
 reactMixin(JobBuilds.prototype, ListenerMixin);

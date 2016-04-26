@@ -28,7 +28,7 @@ const client = function (mozaik) {
 
     return {
         coverage(params) {
-            return buildRequest(`/job/${params.job}/lastSuccessfulBuild/${params.reporter}/api/json?depth=2`, `${params.baseUrl}`, `${params.user}`, `${params.password}`)
+            return buildRequest(`/job/${params.job}/lastSuccessfulBuild/${params.reporter}/api/json?depth=2`, params.baseUrl, params.user, params.password)
             .then((res) => {
                     if(params.reporter === "cobertura") {
                         return {
@@ -54,31 +54,31 @@ const client = function (mozaik) {
         },
 
         testReport(params) {
-            return buildRequest(`/job/${ params.job }/lastCompletedBuild/testReport/api/json`,  `${params.baseUrl}`, `${params.user}`, `${params.password}`)
+            return buildRequest(`/job/${ params.job }/lastCompletedBuild/testReport/api/json`,  params.baseUrl, params.user, params.password)
                 .then(res => res.body)
                 ;
         },
 
         jobs() {
-            return buildRequest('/api/json?tree=jobs[name,lastBuild[number,building,timestamp,result]]&pretty=true',  `${params.baseUrl}`, `${params.user}`, `${params.password}`)
+            return buildRequest('/api/json?tree=jobs[name,lastBuild[number,building,timestamp,result]]&pretty=true')
                 .then(res => res.body.jobs)
             ;
         },
 
         job(params) {
-            return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building,changeSet[items[msg,author[fullName]]]]`,  `${params.baseUrl}`, `${params.user}`, `${params.password}`)
+            return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building,changeSet[items[msg,author[fullName]]]]`,  params.baseUrl, params.user, params.password)
                 .then(res => res.body.builds)
             ;
         },
 
         jobBuild(params) {
-            return buildRequest(`/job/${ params.job }/${ params.buildNumber }/api/json?pretty=true`,  `${params.baseUrl}`, `${params.user}`, `${params.password}`)
+            return buildRequest(`/job/${ params.job }/${ params.buildNumber }/api/json?pretty=true`,  params.baseUrl, params.user, params.password)
                 .then(res => res.body)
             ;
         },
 
         view(params) {
-            return buildRequest(`/view/${ params.view }/api/json?pretty=true&depth=1`,  `${params.baseUrl}`, `${params.user}`, `${params.password}`)
+            return buildRequest(`/view/${ params.view }/api/json?pretty=true&depth=1`,  params.baseUrl, params.user, params.password)
                 .then(res => {
                     let view = res.body;
                     let jobs = view.jobs;

@@ -10,10 +10,7 @@ var View = React.createClass({
     ],
 
     propTypes: {
-        view: React.PropTypes.string.isRequired,
-        baseUrl: PropTypes.string,
-        user: PropTypes.string,
-        password: PropTypes.string
+        view: React.PropTypes.string.isRequired
     },
 
     getInitialState() {

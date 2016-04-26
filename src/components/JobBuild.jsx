@@ -23,7 +23,10 @@ class JobBuild extends Component {
 }
 
 JobBuild.propTypes = {
-    build: PropTypes.object.isRequired
+    build: PropTypes.object.isRequired,
+    baseUrl: PropTypes.string,
+    user: PropTypes.string,
+    password: PropTypes.string
 };
 
 export { JobBuild as default };

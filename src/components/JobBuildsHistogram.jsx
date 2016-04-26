@@ -17,7 +17,12 @@ class JobBuildsHistogram extends Component {
 
         return {
             id:     `jenkins.job.${ job }`,
-            params: { job: job }
+            params: {
+                job: job,
+                baseUrl: this.props.baseUrl,
+                user: this.props.user,
+                password: this.props.password
+            }
         };
     }
 
@@ -66,7 +71,10 @@ class JobBuildsHistogram extends Component {
 
 JobBuildsHistogram.propTypes = {
     job: PropTypes.string.isRequired,
-    cap: PropTypes.number.isRequired
+    cap: PropTypes.number.isRequired,
+    baseUrl: PropTypes.string,
+    user: PropTypes.string,
+    password: PropTypes.string
 };
 
 JobBuildsHistogram.defaultProps = {

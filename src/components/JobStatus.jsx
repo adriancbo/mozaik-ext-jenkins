@@ -10,7 +10,10 @@ var JobStatus = React.createClass({
     ],
 
     propTypes: {
-        job: React.PropTypes.string.isRequired
+        job: React.PropTypes.string.isRequired,
+        baseUrl: PropTypes.string,
+        user: PropTypes.string,
+        password: PropTypes.string
     },
 
     getInitialState() {
@@ -23,7 +26,10 @@ var JobStatus = React.createClass({
         return {
             id: 'jenkins.job.' + this.props.job,
             params: {
-                job: this.props.job
+                job: this.props.job,
+                baseUrl: this.props.baseUrl,
+                user: this.props.user,
+                password: this.props.password
             }
         };
     },

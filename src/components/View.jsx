@@ -10,7 +10,10 @@ var View = React.createClass({
     ],
 
     propTypes: {
-        view: React.PropTypes.string.isRequired
+        view: React.PropTypes.string.isRequired,
+        baseUrl: PropTypes.string,
+        user: PropTypes.string,
+        password: PropTypes.string
     },
 
     getInitialState() {
@@ -23,7 +26,10 @@ var View = React.createClass({
         return {
             id: 'jenkins.view.' + this.props.view,
             params: {
-                view: this.props.view
+                view: this.props.view,
+                baseUrl: this.props.baseUrl,
+                user: this.props.user,
+                password: this.props.password
             }
         };
     },

@@ -12,15 +12,15 @@ const client = function (mozaik) {
 
     mozaik.loadApiConfig(config);
 
-    function buildRequest(path) {
-        let url = config.get('jenkins.baseUrl') + path;
+    function buildRequest(path, baseUrlOverride, userOverride, passwordOverride) {
+        let url = baseUrlOverride ? baseUrlOverride + path : config.get('jenkins.baseUrl') + path;
 
         mozaik.logger.info(chalk.yellow(`[jenkins] fetching from ${ url }`));
 
         return request.get(url)
             .auth(
-                config.get('jenkins.basicAuthUser'),
-                config.get('jenkins.basicAuthPassword')
+                userOverride ? userOverride : config.get('jenkins.basicAuthUser'),
+                passwordOverride ? passwordOverride : config.get('jenkins.basicAuthPassword')
             )
             .promise()
         ;
@@ -28,7 +28,7 @@ const client = function (mozaik) {
 
     return {
         coverage(params) {
-            return buildRequest(`/job/${params.job}/lastSuccessfulBuild/${params.reporter}/api/json?depth=2`)
+            return buildRequest(`/job/${params.job}/lastSuccessfulBuild/${params.reporter}/api/json?depth=2`, params.baseUrl, params.user, params.password)
             .then((res) => {
                     if(params.reporter === "cobertura") {
                         return {
@@ -54,11 +54,11 @@ const client = function (mozaik) {
         },
 
         testReport(params) {
-            return buildRequest(`/job/${ params.job }/lastCompletedBuild/testReport/api/json`)
+            return buildRequest(`/job/${ params.job }/lastCompletedBuild/testReport/api/json`,  params.baseUrl, params.user, params.password)
                 .then(res => res.body)
                 ;
         },
-        
+
         jobs() {
             return buildRequest('/api/json?tree=jobs[name,lastBuild[number,building,timestamp,result]]&pretty=true')
                 .then(res => res.body.jobs)
@@ -66,19 +66,19 @@ const client = function (mozaik) {
         },
 
         job(params) {
-            return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building,changeSet[items[msg,author[fullName]]]]`)
+            return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building,changeSet[items[msg,author[fullName]]]]`,  params.baseUrl, params.user, params.password)
                 .then(res => res.body.builds)
             ;
         },
 
         jobBuild(params) {
-            return buildRequest(`/job/${ params.job }/${ params.buildNumber }/api/json?pretty=true`)
+            return buildRequest(`/job/${ params.job }/${ params.buildNumber }/api/json?pretty=true`,  params.baseUrl, params.user, params.password)
                 .then(res => res.body)
             ;
         },
 
         view(params) {
-            return buildRequest(`/view/${ params.view }/api/json?pretty=true&depth=1`)
+            return buildRequest(`/view/${ params.view }/api/json?pretty=true&depth=1`,  params.baseUrl, params.user, params.password)
                 .then(res => {
                     let view = res.body;
                     let jobs = view.jobs;

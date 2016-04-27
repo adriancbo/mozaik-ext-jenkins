@@ -17,7 +17,12 @@ class JobBuildsHistogram extends Component {
 
         return {
             id:     `jenkins.job.${ job }`,
-            params: { job: job }
+            params: {
+                job: job,
+                baseUrl: this.props.baseUrl,
+                user: this.props.user,
+                password: this.props.password
+            }
         };
     }
 

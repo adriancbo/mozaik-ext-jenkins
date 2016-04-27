@@ -19,7 +19,10 @@ var Jobs = React.createClass({
 
     getApiRequest() {
         return {
-            id: 'jenkins.jobs'
+            id: 'jenkins.jobs',
+            baseUrl: this.props.baseUrl,
+            user: this.props.user,
+            password: this.props.password
         };
     },
 

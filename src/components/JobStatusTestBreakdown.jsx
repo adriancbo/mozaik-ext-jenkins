@@ -25,7 +25,10 @@ var JobStatusTestBreakdown = React.createClass({
         return {
             id: 'jenkins.testReport.' + this.props.job,
             params: {
-                job: this.props.job
+                job: this.props.job,
+                baseUrl: this.props.baseUrl,
+                user: this.props.user,
+                password: this.props.password
             }
         };
     },

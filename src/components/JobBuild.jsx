@@ -4,7 +4,7 @@ import moment                          from 'moment';
 
 class JobBuild extends Component {
     render() {
-        let { build, job, baseUrl, user, password } = this.props;
+        let { build, job, instance } = this.props;
 
         let classes = `list__item list__item--with-status list__item--with-status--${ build.result.toLowerCase() }`;
         let link = baseUrl ? baseUrl + `/job/${job}/${build.number}` : `http://fmsscm.corp.intuit.net/qbo-build/job/${job}/${build.number}`;

@@ -19,9 +19,7 @@ class JobBuilds extends Component {
             id:     `jenkins.job.${ this.props.job} `,
             params: {
                 job: this.props.job,
-                baseUrl: this.props.baseUrl,
-                user: this.props.user,
-                password: this.props.password
+                instance: this.props.instance
             }
         };
     }
@@ -34,7 +32,7 @@ class JobBuilds extends Component {
 
     render() {
         var buildNodes = _.map(this.state.builds, build => {
-            return build.building ? "" : (<JobBuild build={build} baseUrl={this.props.baseUrl} job={this.props.job} key={build.number} />);
+            return build.building ? "" : (<JobBuild build={build} instance= {this.props.instance} job={this.props.job} key={build.number} />);
         });
 
         return (

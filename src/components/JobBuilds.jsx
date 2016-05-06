@@ -24,9 +24,9 @@ class JobBuilds extends Component {
         };
     }
 
-    onApiData(builds) {
+    onApiData(data) {
         this.setState({
-            builds: builds
+            builds: data.builds
         });
     }
 

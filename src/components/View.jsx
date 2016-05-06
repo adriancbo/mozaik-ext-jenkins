@@ -24,9 +24,7 @@ var View = React.createClass({
             id: 'jenkins.view.' + this.props.view,
             params: {
                 view: this.props.view,
-                baseUrl: this.props.baseUrl,
-                user: this.props.user,
-                password: this.props.password
+                instance: this.props.instance
             }
         };
     },

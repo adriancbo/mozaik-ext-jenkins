@@ -10,7 +10,8 @@ class JobBuilds extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            builds: []
+            builds: [],
+            url: ''
         };
     }
 
@@ -26,13 +27,14 @@ class JobBuilds extends Component {
 
     onApiData(data) {
         this.setState({
-            builds: data.builds
+            builds: data.builds,
+            url: data.url
         });
     }
 
     render() {
         var buildNodes = _.map(this.state.builds, build => {
-            return build.building ? "" : (<JobBuild build={build} instance= {this.props.instance} job={this.props.job} key={build.number} />);
+            return build.building ? "" : (<JobBuild url={this.state.url} build={build} instance= {this.props.instance} job={this.props.job} key={build.number} />);
         });
 
         return (

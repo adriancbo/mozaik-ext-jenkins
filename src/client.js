@@ -67,8 +67,10 @@ const client = function (mozaik) {
         job(params) {
             return buildRequest(`/job/${ params.job }/api/json?pretty=true&depth=10&tree=builds[number,duration,result,builtOn,timestamp,id,building,changeSet[items[msg,author[fullName]]]]`, params.instance)
                 .then(res => {
+                    let baseUrl = params.instance ? config.get('jenkins.' + params.instance + '.baseUrl') : config.get('jenkins.baseUrl');
                     return {
-                        builds: res.body.builds
+                        builds: res.body.builds,
+                        url: `${baseUrl}/job/${params.job}`
                     }
                 });
         },

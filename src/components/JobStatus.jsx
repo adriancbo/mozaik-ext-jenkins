@@ -31,7 +31,7 @@ var JobStatus = React.createClass({
 
     onApiData(builds) {
         this.setState({
-            builds: builds
+            builds: builds.builds
         });
     },
 

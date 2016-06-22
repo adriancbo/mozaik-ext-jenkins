@@ -60,7 +60,6 @@ var config = convict({
                 env:    'FMSTEST_JENKINS_API_BASIC_AUTH_PASSWORD'
             }
         }
-        }
     }
 });
 

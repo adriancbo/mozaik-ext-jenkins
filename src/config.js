@@ -39,6 +39,27 @@ var config = convict({
                 format:  String,
                 env:    'EMS_JENKINS_API_BASIC_AUTH_PASSWORD'
             }
+        },
+        fmstest: {
+            baseUrl: {
+                doc:     'The jenkins API base url.',
+                default: null,
+                format:  String,
+                env:    'FMSTEST_JENKINS_API_BASE_URL'
+            },
+            basicAuthUser: {
+                doc:     'The jenkins API basic http auth user.',
+                default: null,
+                format:  String,
+                env:    'FMSTEST_JENKINS_API_BASIC_AUTH_USER'
+            },
+            basicAuthPassword: {
+                doc:     'The jenkins API basic http auth password.',
+                default: null,
+                format:  String,
+                env:    'FMSTEST_JENKINS_API_BASIC_AUTH_PASSWORD'
+            }
+        }
         }
     }
 });
